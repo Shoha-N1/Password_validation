@@ -24,15 +24,17 @@ export default function PasswordValid() {
 
   function Validations(values) {
      let error = {} 
-     const password_RegExp = /^(?=.*d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
+     const password_RegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
      if (values.password_input === "") {
         error.password_input = "Password should not be empty"
      }
      else if (!password_RegExp.test(values.password_input)) {
-        error.password_input = "Password didn't match"
+        const erdet = <details><summary>Password didn't match</summary> "If an error occurs, one of the following steps was not performed: 1. Must be at least 8 letters  2. At least 1 capital letter must be used  3. at least 1 lowercase letter must be used   4. must be at least 1 character"</details>
+  
+        error.password_input = erdet
      }
-      if (values.confirm_password === "" || values.confirm_password !== values.password) {
+      if (values.confirm_password === "" ||String(values.confirm_password) !== String(values.password_input)) {
         error.confirm_password = "Password not matched"
      }
 
